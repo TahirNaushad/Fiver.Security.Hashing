@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using System;
-using System.Security.Cryptography;
 using System.Text;
 
 namespace Fiver.Security.Hashing
@@ -21,18 +20,5 @@ namespace Fiver.Security.Hashing
 
         public static bool Validate(string value, string salt, string hash)
             => Create(value, salt) == hash;
-    }
-
-    public class Salt
-    {
-        public static string Create()
-        {
-            byte[] randomBytes = new byte[128 / 8];
-            using (var generator = RandomNumberGenerator.Create())
-            {
-                generator.GetBytes(randomBytes);
-                return Convert.ToBase64String(randomBytes);
-            }
-        }
     }
 }
